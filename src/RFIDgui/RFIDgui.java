@@ -36,40 +36,18 @@ public class RFIDgui extends javax.swing.JFrame {
         descriptionTextField = new javax.swing.JTextField();
         thumbnailDisplay = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        saveTagData = new javax.swing.JButton();
+        exitTagWindow = new javax.swing.JButton();
         viewFullSizeImage = new javax.swing.JButton();
-        setTagImage = new javax.swing.JButton();
-        selectDatabase = new javax.swing.JFileChooser();
-        OLDcode = new javax.swing.JFrame();
-        OLDdetectedTagScrollPanel = new javax.swing.JScrollPane();
-        OLDdetectedTagList = new javax.swing.JList<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        tagImageChooser = new javax.swing.JFileChooser();
         fullImageWindow = new javax.swing.JFrame();
         fullImageLabel = new javax.swing.JLabel();
-        writeTagWindow = new javax.swing.JFrame();
-        writeTagWriteButton = new javax.swing.JButton();
-        writeTagExitButton = new javax.swing.JButton();
-        writeTagPanel = new javax.swing.JPanel();
-        writeTagScrollPanel = new javax.swing.JScrollPane();
-        writeTagTable = new javax.swing.JTable();
-        writeWarningPopup = new javax.swing.JDialog();
-        writeWarningLabel = new javax.swing.JLabel();
-        writeWarningOkButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         detectedTagScrollPanel = new javax.swing.JScrollPane();
         detectedTagTable = new javax.swing.JTable();
         mainExitButton = new javax.swing.JButton();
         scanButton = new javax.swing.JButton();
-        scanContinuously = new javax.swing.JCheckBox();
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
-        fileMenuOpenDatabase = new javax.swing.JMenuItem();
         fileMenuQuit = new javax.swing.JMenuItem();
-        optionsMenu = new javax.swing.JMenu();
-        optionsMenuConfig = new javax.swing.JMenuItem();
-        optionsMenuWriteTag = new javax.swing.JMenuItem();
 
         editTagWindow.setTitle("Edit Tag");
         editTagWindow.setMinimumSize(new java.awt.Dimension(400, 200));
@@ -87,16 +65,13 @@ public class RFIDgui extends javax.swing.JFrame {
         nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         nameLabel.setText("Name:");
 
+        nameTextField.setEditable(false);
         nameTextField.setText("Sample Tag");
-        nameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTextFieldActionPerformed(evt);
-            }
-        });
 
         descriptionLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         descriptionLabel.setText("Description:");
 
+        descriptionTextField.setEditable(false);
         descriptionTextField.setText("Sample description.");
 
         javax.swing.GroupLayout editTagPanelLayout = new javax.swing.GroupLayout(editTagPanel);
@@ -143,13 +118,13 @@ public class RFIDgui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(thumbnailDisplay))
                     .addComponent(descriptionTextField))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
 
-        saveTagData.setText("Save and Exit");
-        saveTagData.addMouseListener(new java.awt.event.MouseAdapter() {
+        exitTagWindow.setText("Exit");
+        exitTagWindow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                saveTagDataMouseClicked(evt);
+                exitTagWindowMouseClicked(evt);
             }
         });
 
@@ -157,13 +132,6 @@ public class RFIDgui extends javax.swing.JFrame {
         viewFullSizeImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewFullSizeImageMouseClicked(evt);
-            }
-        });
-
-        setTagImage.setText("Set Tag Image");
-        setTagImage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                setTagImageMouseClicked(evt);
             }
         });
 
@@ -179,10 +147,8 @@ public class RFIDgui extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(editTagWindowLayout.createSequentialGroup()
                         .addComponent(viewFullSizeImage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(setTagImage)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveTagData)))
+                        .addComponent(exitTagWindow)))
                 .addContainerGap())
         );
         editTagWindowLayout.setVerticalGroup(
@@ -192,53 +158,10 @@ public class RFIDgui extends javax.swing.JFrame {
                 .addComponent(editTagPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveTagData)
-                    .addComponent(viewFullSizeImage)
-                    .addComponent(setTagImage))
+                    .addComponent(exitTagWindow)
+                    .addComponent(viewFullSizeImage))
                 .addContainerGap())
         );
-
-        OLDdetectedTagList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "12", "34", "56", "78", "90" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        OLDdetectedTagList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                OLDdetectedTagListMouseClicked(evt);
-            }
-        });
-        OLDdetectedTagScrollPanel.setViewportView(OLDdetectedTagList);
-
-        javax.swing.GroupLayout OLDcodeLayout = new javax.swing.GroupLayout(OLDcode.getContentPane());
-        OLDcode.getContentPane().setLayout(OLDcodeLayout);
-        OLDcodeLayout.setHorizontalGroup(
-            OLDcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OLDcodeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(OLDdetectedTagScrollPanel)
-                .addContainerGap())
-        );
-        OLDcodeLayout.setVerticalGroup(
-            OLDcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OLDcodeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(OLDdetectedTagScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         fullImageWindow.setTitle("RFID Tag Image");
         fullImageWindow.setSize(new java.awt.Dimension(536, 536));
@@ -264,142 +187,6 @@ public class RFIDgui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(fullImageLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        writeTagWriteButton.setText("Write");
-        writeTagWriteButton.setMargin(new java.awt.Insets(5, 10, 5, 10));
-        writeTagWriteButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                writeTagWriteButtonMouseClicked(evt);
-            }
-        });
-
-        writeTagExitButton.setText("Exit");
-        writeTagExitButton.setMargin(new java.awt.Insets(5, 10, 5, 10));
-        writeTagExitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                writeTagExitButtonMouseClicked(evt);
-            }
-        });
-
-        writeTagScrollPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Detected Tags:"));
-
-        writeTagTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Tag Number", "Name", "Description"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        writeTagTable.getTableHeader().setReorderingAllowed(false);
-        writeTagTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                writeTagTableMouseClicked(evt);
-            }
-        });
-        writeTagScrollPanel.setViewportView(writeTagTable);
-        writeTagTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (writeTagTable.getColumnModel().getColumnCount() > 0) {
-            writeTagTable.getColumnModel().getColumn(0).setPreferredWidth(10);
-            writeTagTable.getColumnModel().getColumn(1).setPreferredWidth(10);
-        }
-
-        javax.swing.GroupLayout writeTagPanelLayout = new javax.swing.GroupLayout(writeTagPanel);
-        writeTagPanel.setLayout(writeTagPanelLayout);
-        writeTagPanelLayout.setHorizontalGroup(
-            writeTagPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(writeTagScrollPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
-        );
-        writeTagPanelLayout.setVerticalGroup(
-            writeTagPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(writeTagScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout writeTagWindowLayout = new javax.swing.GroupLayout(writeTagWindow.getContentPane());
-        writeTagWindow.getContentPane().setLayout(writeTagWindowLayout);
-        writeTagWindowLayout.setHorizontalGroup(
-            writeTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(writeTagWindowLayout.createSequentialGroup()
-                .addContainerGap(642, Short.MAX_VALUE)
-                .addComponent(writeTagWriteButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(writeTagExitButton)
-                .addContainerGap())
-            .addGroup(writeTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(writeTagWindowLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(writeTagPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        writeTagWindowLayout.setVerticalGroup(
-            writeTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, writeTagWindowLayout.createSequentialGroup()
-                .addContainerGap(406, Short.MAX_VALUE)
-                .addGroup(writeTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(writeTagExitButton)
-                    .addComponent(writeTagWriteButton))
-                .addContainerGap())
-            .addGroup(writeTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, writeTagWindowLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(writeTagPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(58, 58, 58)))
-        );
-
-        writeWarningLabel.setText("Warning! All tags listed in the following window may be overwritten.");
-
-        writeWarningOkButton.setText("Ok");
-        writeWarningOkButton.setHideActionText(true);
-        writeWarningOkButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                writeWarningOkButtonMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout writeWarningPopupLayout = new javax.swing.GroupLayout(writeWarningPopup.getContentPane());
-        writeWarningPopup.getContentPane().setLayout(writeWarningPopupLayout);
-        writeWarningPopupLayout.setHorizontalGroup(
-            writeWarningPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(writeWarningPopupLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(writeWarningPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(writeWarningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(writeWarningOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        writeWarningPopupLayout.setVerticalGroup(
-            writeWarningPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(writeWarningPopupLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(writeWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(writeWarningOkButton)
-                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -468,7 +255,7 @@ public class RFIDgui extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(detectedTagScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
+            .addComponent(detectedTagScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,29 +277,8 @@ public class RFIDgui extends javax.swing.JFrame {
                 scanButtonMouseClicked(evt);
             }
         });
-        scanButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scanButtonActionPerformed(evt);
-            }
-        });
-
-        scanContinuously.setText("Scan Continuously");
-        scanContinuously.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scanContinuouslyActionPerformed(evt);
-            }
-        });
 
         fileMenu.setText("File");
-
-        fileMenuOpenDatabase.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        fileMenuOpenDatabase.setText("Open Database File");
-        fileMenuOpenDatabase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileMenuOpenDatabaseActionPerformed(evt);
-            }
-        });
-        fileMenu.add(fileMenuOpenDatabase);
 
         fileMenuQuit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         fileMenuQuit.setText("Quit");
@@ -525,24 +291,6 @@ public class RFIDgui extends javax.swing.JFrame {
 
         mainMenuBar.add(fileMenu);
 
-        optionsMenu.setText("Options");
-
-        optionsMenuConfig.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        optionsMenuConfig.setText("Configure Antennas");
-        optionsMenu.add(optionsMenuConfig);
-
-        optionsMenuWriteTag.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        optionsMenuWriteTag.setText("Write Tag ID");
-        optionsMenuWriteTag.setAutoscrolls(true);
-        optionsMenuWriteTag.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optionsMenuWriteTagActionPerformed(evt);
-            }
-        });
-        optionsMenu.add(optionsMenuWriteTag);
-
-        mainMenuBar.add(optionsMenu);
-
         setJMenuBar(mainMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -554,8 +302,7 @@ public class RFIDgui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(scanContinuously)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(scanButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mainExitButton)))
@@ -569,37 +316,12 @@ public class RFIDgui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mainExitButton)
-                    .addComponent(scanButton)
-                    .addComponent(scanContinuously))
+                    .addComponent(scanButton))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void writeToFile() {
-        org.json.simple.JSONObject tagList = new org.json.simple.JSONObject();
-        
-        org.json.simple.JSONArray array = new org.json.simple.JSONArray();
-        
-        for (int i = 0; i < rfidTagDatabase.size(); i++) {
-            org.json.simple.JSONObject obj = new org.json.simple.JSONObject();
-            obj.put("ID Number", rfidTagDatabase.get(i).tagNumber);
-            obj.put("Name", rfidTagDatabase.get(i).objectName);
-            obj.put("Description", rfidTagDatabase.get(i).objectDescription);
-            array.add(obj);
-        }
-
-        tagList.put("RFID Data List", array);
-        
-        try (java.io.FileWriter file = new java.io.FileWriter("./default.json")) {
-            file.write(tagList.toJSONString());
-            file.flush();
-            file.close();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void readFromFile(String filenameIn) {
         org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
@@ -620,62 +342,10 @@ public class RFIDgui extends javax.swing.JFrame {
         }
     }
 
-    private void scanContinuouslyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanContinuouslyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_scanContinuouslyActionPerformed
-
-    private void OLDdetectedTagListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OLDdetectedTagListMouseClicked
-//        javax.swing.JList<String> list = (javax.swing.JList<String>) evt.getSource();
-//        java.awt.Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex());
-//        if (r != null && r.contains(evt.getPoint()) && evt.getClickCount() == 2) {
-//            int index = list.locationToIndex(evt.getPoint());
-//            javax.swing.ListModel<String> model = list.getModel();
-//            System.out.println(model.getElementAt(index));
-//
-//            RFIDdata current = new RFIDdata(java.lang.Integer.parseInt(model.getElementAt(index)));
-//            if (rfidTagList.contains(current)) {
-//                current = rfidTagList.get(rfidTagList.indexOf(current));
-//            } else {
-//                rfidTagList.add(current);
-//            }
-//            this.editTagWindow.setVisible(true);
-//            this.idTextField.setText(java.lang.Integer.toString(current.tagNumber));
-//            this.nameTextField.setText(current.objectName);
-//            this.descriptionTextField.setText(current.objectDescription);
-//            System.out.println("index: " + index);
-//        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_OLDdetectedTagListMouseClicked
-
-    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameTextFieldActionPerformed
-
-    private void saveTagDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveTagDataMouseClicked
-//        RFIDdata current = new RFIDdata(idTextField.getText(), nameTextField.getText(), descriptionTextField.getText());
-        RFIDdata current = new RFIDdata(idTextField.getText());
-        rfidTagList.remove(current);
-        rfidTagDatabase.remove(current);
-        
-        RFIDdata toWrite = new RFIDdata(idTextField.getText(), nameTextField.getText(), descriptionTextField.getText());
-        rfidTagList.add(toWrite);
-        rfidTagDatabase.add(toWrite);
-        
-        writeToFile();
-        updateTagTable();
+    private void exitTagWindowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTagWindowMouseClicked
         this.editTagWindow.setVisible(false);
-        
-        System.out.println("\n\nSaving:\n");
-        for (int i = 0; i < rfidTagList.size(); i++) {
-            System.out.println(rfidTagList.get(i).tagNumber);
-            System.out.println(rfidTagList.get(i).objectName);
-            System.out.println(rfidTagList.get(i).objectDescription);
-        }
-    }//GEN-LAST:event_saveTagDataMouseClicked
-
-    private void fileMenuOpenDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuOpenDatabaseActionPerformed
-        readFromFile(databaseFile);
-    }//GEN-LAST:event_fileMenuOpenDatabaseActionPerformed
+        this.editTagWindow.dispose();
+    }//GEN-LAST:event_exitTagWindowMouseClicked
 
     private void fileMenuQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuQuitActionPerformed
         exitReader();
@@ -706,7 +376,6 @@ public class RFIDgui extends javax.swing.JFrame {
         //////
         
         updateTagTable();
-        writeToFile();
         
         this.setCursor(java.awt.Cursor.getDefaultCursor());
     }//GEN-LAST:event_scanButtonMouseClicked
@@ -735,48 +404,6 @@ public class RFIDgui extends javax.swing.JFrame {
         }
     }
     
-    private void populateWriteTagWindow(){
-        
-        this.writeTagWindow.setVisible(true);
-        this.writeTagWindow.setSize(787, 477);
-        
-        this.writeWarningPopup.setVisible(true);
-        this.writeWarningPopup.setSize(440, 105);
-        
-        for (int i = 0; i < writeTagTable.getRowCount(); i++) {
-            for(int j = 0; j < writeTagTable.getColumnCount(); j++) {
-                writeTagTable.setValueAt("", i, j);
-            }
-        }
-        
-        
-        try {
-//            while (true) {
-                Thread.sleep(250);
-//                writeTagList = NULL;
-//                for (int i = 0; i < writeTagList.size(); i++) {
-//                    writeTagTable.setValueAt(writeTagList.get(i).tagNumber, i, 0);
-//                    writeTagTable.setValueAt(writeTagList.get(i).objectName, i, 1);
-//                    writeTagTable.setValueAt(writeTagList.get(i).objectDescription, i, 2);
-//                }
-//                Thread.sleep(250);
-//            }
-            
-        } catch (InterruptedException ie) {
-            System.out.println("Exception: " + ie.getMessage());
-            
-        }
-        
-//        writeTagList = NULL;// continuousReader.getTagList();
-//        
-//        System.out.println("\n\nUpdate:\n");
-//        for (int i = 0; i < this.writeTagList.size(); i++) {
-//            System.out.println(this.writeTagList.get(i).tagNumber);
-//            System.out.println(this.writeTagList.get(i).objectName);
-//            System.out.println(this.writeTagList.get(i).objectDescription);
-//        }
-        
-    }
     
     private void populateTagWindow(RFIDdata currentIn){
         this.editTagWindow.setVisible(true);
@@ -843,25 +470,6 @@ public class RFIDgui extends javax.swing.JFrame {
         }
     }
     
-    private void setTagImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setTagImageMouseClicked
-         if(this.tagImageChooser.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
-             java.io.File imageFile = tagImageChooser.getSelectedFile(); 
-//             createImageData(imageFile, "1");     // For testing
-             createImageData(imageFile, this.idTextField.getText());
-             try {
-                String current = new java.io.File( "." ).getCanonicalPath();
-                java.nio.file.Path filePath = java.nio.file.Paths.get(current, "database", this.idTextField.getText(), "thumb.png");
-                javax.swing.ImageIcon newIcon = new javax.swing.ImageIcon(filePath.toString());
-                newIcon.getImage().flush();
-                this.thumbnailDisplay.setIcon( new javax.swing.ImageIcon(javax.imageio.ImageIO.read( new java.io.File(filePath.toString()) ) ) );
-                
-             } catch (IOException ex) {
-                System.out.println("Error finding image.");
-                ex.printStackTrace();
-             }
-         } 
-    }//GEN-LAST:event_setTagImageMouseClicked
-
     private void viewFullSizeImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewFullSizeImageMouseClicked
         
         try {
@@ -898,36 +506,11 @@ public class RFIDgui extends javax.swing.JFrame {
         this.fullImageWindow.setVisible(false);
     }//GEN-LAST:event_fullImageLabelMouseClicked
 
-    private void scanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanButtonActionPerformed
-        // TODO ad your handling code here:
-    }//GEN-LAST:event_scanButtonActionPerformed
-
     private void mainExitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainExitButtonMouseClicked
         exitReader();
     }//GEN-LAST:event_mainExitButtonMouseClicked
-
-    private void writeTagTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_writeTagTableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_writeTagTableMouseClicked
-
-    private void optionsMenuWriteTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsMenuWriteTagActionPerformed
-        populateWriteTagWindow();
-    }//GEN-LAST:event_optionsMenuWriteTagActionPerformed
-
-    private void writeTagWriteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_writeTagWriteButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_writeTagWriteButtonMouseClicked
-
-    private void writeTagExitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_writeTagExitButtonMouseClicked
-        this.writeTagWindow.setVisible(false);
-    }//GEN-LAST:event_writeTagExitButtonMouseClicked
-
-    private void writeWarningOkButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_writeWarningOkButtonMouseClicked
-        this.writeWarningPopup.setVisible(false);
-    }//GEN-LAST:event_writeWarningOkButtonMouseClicked
     
     private void exitReader() {
-        writeToFile();
         setVisible(false);
         dispose();
     }
@@ -972,51 +555,28 @@ public class RFIDgui extends javax.swing.JFrame {
     private java.util.ArrayList<RFIDdata> writeTagList = new java.util.ArrayList<RFIDdata>();
     private java.util.ArrayList<RFIDdata> rfidTagDatabase = new java.util.ArrayList<RFIDdata>();
     private String databaseFile = "./database/default.json";
-    private String[] tagReads;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFrame OLDcode;
-    private javax.swing.JList<String> OLDdetectedTagList;
-    private javax.swing.JScrollPane OLDdetectedTagScrollPanel;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JTextField descriptionTextField;
     private javax.swing.JScrollPane detectedTagScrollPanel;
     private javax.swing.JTable detectedTagTable;
     private javax.swing.JPanel editTagPanel;
     private javax.swing.JFrame editTagWindow;
+    private javax.swing.JButton exitTagWindow;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenuItem fileMenuOpenDatabase;
     private javax.swing.JMenuItem fileMenuQuit;
     private javax.swing.JLabel fullImageLabel;
     private javax.swing.JFrame fullImageWindow;
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton mainExitButton;
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
-    private javax.swing.JMenu optionsMenu;
-    private javax.swing.JMenuItem optionsMenuConfig;
-    private javax.swing.JMenuItem optionsMenuWriteTag;
-    private javax.swing.JButton saveTagData;
     private javax.swing.JButton scanButton;
-    private javax.swing.JCheckBox scanContinuously;
-    private javax.swing.JFileChooser selectDatabase;
-    private javax.swing.JButton setTagImage;
-    private javax.swing.JFileChooser tagImageChooser;
     private javax.swing.JLabel thumbnailDisplay;
     private javax.swing.JButton viewFullSizeImage;
-    private javax.swing.JButton writeTagExitButton;
-    private javax.swing.JPanel writeTagPanel;
-    private javax.swing.JScrollPane writeTagScrollPanel;
-    private javax.swing.JTable writeTagTable;
-    private javax.swing.JFrame writeTagWindow;
-    private javax.swing.JButton writeTagWriteButton;
-    private javax.swing.JLabel writeWarningLabel;
-    private javax.swing.JButton writeWarningOkButton;
-    private javax.swing.JDialog writeWarningPopup;
     // End of variables declaration//GEN-END:variables
 }

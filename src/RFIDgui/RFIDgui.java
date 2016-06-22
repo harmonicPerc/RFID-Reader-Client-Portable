@@ -14,7 +14,7 @@ public class RFIDgui extends javax.swing.JFrame {
     public RFIDgui() {
         initComponents();
         detectedTagTable.setColumnSelectionAllowed(false);
-        readFromFile(databaseFile);
+        updateTagTable();
     }
 
     /**
@@ -45,12 +45,14 @@ public class RFIDgui extends javax.swing.JFrame {
         detectedTagTable = new javax.swing.JTable();
         mainExitButton = new javax.swing.JButton();
         scanButton = new javax.swing.JButton();
+        openTagWindowButton = new javax.swing.JButton();
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         fileMenuQuit = new javax.swing.JMenuItem();
 
         editTagWindow.setTitle("Edit Tag");
         editTagWindow.setMinimumSize(new java.awt.Dimension(400, 200));
+        editTagWindow.setResizable(false);
         editTagWindow.setSize(new java.awt.Dimension(800, 445));
 
         editTagPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("RFID Tag Data"));
@@ -118,10 +120,13 @@ public class RFIDgui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(thumbnailDisplay))
                     .addComponent(descriptionTextField))
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         exitTagWindow.setText("Exit");
+        exitTagWindow.setMaximumSize(new java.awt.Dimension(70, 37));
+        exitTagWindow.setMinimumSize(new java.awt.Dimension(70, 37));
+        exitTagWindow.setPreferredSize(new java.awt.Dimension(70, 37));
         exitTagWindow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 exitTagWindowMouseClicked(evt);
@@ -129,6 +134,9 @@ public class RFIDgui extends javax.swing.JFrame {
         });
 
         viewFullSizeImage.setText("View Full Size Image");
+        viewFullSizeImage.setMaximumSize(new java.awt.Dimension(178, 37));
+        viewFullSizeImage.setMinimumSize(new java.awt.Dimension(178, 37));
+        viewFullSizeImage.setPreferredSize(new java.awt.Dimension(178, 37));
         viewFullSizeImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewFullSizeImageMouseClicked(evt);
@@ -142,24 +150,22 @@ public class RFIDgui extends javax.swing.JFrame {
             .addGroup(editTagWindowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(editTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editTagPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
                     .addGroup(editTagWindowLayout.createSequentialGroup()
-                        .addComponent(editTagPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(editTagWindowLayout.createSequentialGroup()
-                        .addComponent(viewFullSizeImage)
+                        .addComponent(viewFullSizeImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitTagWindow)))
+                        .addComponent(exitTagWindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         editTagWindowLayout.setVerticalGroup(
             editTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editTagWindowLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(editTagPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(editTagPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(editTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(exitTagWindow)
-                    .addComponent(viewFullSizeImage))
+                .addGroup(editTagWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(exitTagWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewFullSizeImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -278,6 +284,16 @@ public class RFIDgui extends javax.swing.JFrame {
             }
         });
 
+        openTagWindowButton.setText("View Tag Information");
+        openTagWindowButton.setMaximumSize(new java.awt.Dimension(184, 37));
+        openTagWindowButton.setMinimumSize(new java.awt.Dimension(184, 37));
+        openTagWindowButton.setPreferredSize(new java.awt.Dimension(184, 37));
+        openTagWindowButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                openTagWindowButtonMouseClicked(evt);
+            }
+        });
+
         fileMenu.setText("File");
 
         fileMenuQuit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
@@ -302,7 +318,8 @@ public class RFIDgui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(openTagWindowButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(scanButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mainExitButton)))
@@ -313,33 +330,20 @@ public class RFIDgui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mainExitButton)
-                    .addComponent(scanButton))
+                    .addComponent(scanButton)
+                    .addComponent(openTagWindowButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void readFromFile(String filenameIn) {
-        org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-        try {
-            org.json.simple.JSONObject obj = (org.json.simple.JSONObject) parser.parse(new java.io.FileReader(filenameIn));
-            org.json.simple.JSONArray array = (org.json.simple.JSONArray) obj.get("RFID Data List");
-            
-            java.util.Iterator i = array.iterator();
-            
-            while (i.hasNext()) {
-                org.json.simple.JSONObject innerObj = (org.json.simple.JSONObject) i.next();
-                rfidTagDatabase.add(new RFIDdata(innerObj.get("ID Number").toString(), innerObj.get("Name").toString(), innerObj.get("Description").toString()));
-            }
-            
-            System.out.println(array.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void exitReader() {
+        setVisible(false);
+        dispose();
     }
 
     private void exitTagWindowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTagWindowMouseClicked
@@ -350,33 +354,50 @@ public class RFIDgui extends javax.swing.JFrame {
     private void fileMenuQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuQuitActionPerformed
         exitReader();
     }//GEN-LAST:event_fileMenuQuitActionPerformed
+    
+    private void populateTagWindow(RFIDdata currentIn){
+        this.editTagWindow.setVisible(true);
+        //this.editTagWindow.setSize(946, 442);
+        this.idTextField.setText(currentIn.tagNumber);
+        this.nameTextField.setText(currentIn.objectName);
+        this.descriptionTextField.setText(currentIn.objectDescription);
+        try {
+            String current = new java.io.File( "." ).getCanonicalPath();
+            String thumbnailName = currentIn.tagNumber.concat("thumb.png");
+            java.nio.file.Path filePath = java.nio.file.Paths.get(current, "database", "pictures", thumbnailName);
+            this.thumbnailDisplay.setIcon(new javax.swing.ImageIcon(filePath.toString()));
+        } catch (IOException ex) {
+            System.out.println("Error resizing the image.");
+            ex.printStackTrace();
+        }
+    }
+    
+    private void readFromFile(String filenameIn) {
+        org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
+        try {
+            org.json.simple.JSONObject obj = (org.json.simple.JSONObject) parser.parse(new java.io.FileReader(filenameIn));
+            org.json.simple.JSONArray array = (org.json.simple.JSONArray) obj.get("RFID Data List");
+            
+            java.util.Iterator i = array.iterator();
+            
+            while (i.hasNext()) {
+                org.json.simple.JSONObject innerObj = (org.json.simple.JSONObject) i.next();
+                rfidTagList.add(new RFIDdata(innerObj.get("ID Number").toString(), innerObj.get("Name").toString(), innerObj.get("Description").toString()));
+            }
+            
+            System.out.println(array.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void scanButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scanButtonMouseClicked
         this.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR));
-        
         rfidTagList = new java.util.ArrayList<RFIDdata>();
-        
-        
-//        tagReads = reader.doRead();
-//        for (TagReadData tr: tagReads) {
-//            RFIDdata current = new RFIDdata(tr.getTag().epcString());
-//            if (rfidTagDatabase.contains(current)) {
-//                current = rfidTagDatabase.get(rfidTagDatabase.indexOf(current));
-//                System.out.println("match");
-//            } else {
-//                rfidTagDatabase.add(current);
-//            }
-//            if (!rfidTagList.contains(current)) {
-//                rfidTagList.add(current);
-//            }
-//        }
-        
         ////// Troubleshooting
-         rfidTagList.add(new RFIDdata());
-        //////
-        
+        //rfidTagList.add(new RFIDdata());
+        //////        
         updateTagTable();
-        
         this.setCursor(java.awt.Cursor.getDefaultCursor());
     }//GEN-LAST:event_scanButtonMouseClicked
 
@@ -386,8 +407,21 @@ public class RFIDgui extends javax.swing.JFrame {
                 detectedTagTable.setValueAt("", i, j);
             }
          }
+        try {
+//            Process p = Runtime.getRuntime().exec("receiver.py");
+//            p.waitFor();
+//            p.destroy();
+            ProcessBuilder pb = new ProcessBuilder("python", "receiver.py");
+            Process p = pb.start();
+            p.waitFor();
+            p.destroy();
+                   
+        } catch (Exception e) {
+            System.out.println("Error while retrieving data from server");
+            e.printStackTrace();
+        }
         
-        //readFromFile(databaseFile);
+        readFromFile(databaseFile);
         
 //        ////////// Print Diagnostic Info
 //        System.out.println("\n\nUpdate:\n");
@@ -404,35 +438,6 @@ public class RFIDgui extends javax.swing.JFrame {
         }
     }
     
-    
-    private void populateTagWindow(RFIDdata currentIn){
-        this.editTagWindow.setVisible(true);
-        //this.editTagWindow.setSize(946, 442);
-        this.idTextField.setText(currentIn.tagNumber);
-        this.nameTextField.setText(currentIn.objectName);
-        this.descriptionTextField.setText(currentIn.objectDescription);
-        try {
-            String current = new java.io.File( "." ).getCanonicalPath();
-            java.nio.file.Path folderPath = java.nio.file.Paths.get(current, "database", currentIn.tagNumber);
-            
-            java.io.File file = new java.io.File(folderPath.toString());
-            
-            java.nio.file.Path filePath;
-            
-            if (file.exists()) {
-                filePath = java.nio.file.Paths.get(folderPath.toString(), "thumb.png");
-            } else {
-                filePath = java.nio.file.Paths.get(current, "database", "default", "thumb.png");
-            }
-            
-            this.thumbnailDisplay.setIcon(new javax.swing.ImageIcon(filePath.toString()));
-            
-        } catch (IOException ex) {
-            System.out.println("Error resizing the image.");
-            ex.printStackTrace();
-        }
-    }
-    
     private void detectedTagTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detectedTagTableMouseClicked
         if (evt.getClickCount() == 2) {
             javax.swing.JTable target = (javax.swing.JTable)evt.getSource();
@@ -444,48 +449,18 @@ public class RFIDgui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_detectedTagTableMouseClicked
 
-    private void createImageData(java.io.File inFile, String inID) {
-        try {
-            String current = new java.io.File( "." ).getCanonicalPath();
-            java.nio.file.Path folderPath = java.nio.file.Paths.get(current, "database", inID);
-            java.io.File file = new java.io.File(folderPath.toString());
-//            System.out.println("Proposed dir:"+folderPath.toString());
-            
-            if (!file.exists()) {
-                if (!file.mkdir()) {
-                   System.out.println("Failed to create directory!");
-                }
-            }
-
-            ImageResizer imageResizer = new ImageResizer();
-            
-            java.nio.file.Path mainFilePath = java.nio.file.Paths.get(folderPath.toString(), "main.png");
-            java.nio.file.Path thumbFilePath = java.nio.file.Paths.get(folderPath.toString(), "thumb.png");
-            
-            imageResizer.resize(inFile, mainFilePath.toString(), 1);
-            imageResizer.resize(inFile, thumbFilePath.toString(), 200, 200);
-        } catch (IOException ex) {
-            System.out.println("Error resizing the image.");
-            ex.printStackTrace();
-        }
-    }
-    
     private void viewFullSizeImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewFullSizeImageMouseClicked
         
         try {
             String current = new java.io.File( "." ).getCanonicalPath();
-            java.nio.file.Path folderPath = java.nio.file.Paths.get(current, "database", this.idTextField.getText());
-            java.io.File file = new java.io.File(folderPath.toString());
-            java.nio.file.Path filePath;
-            if (file.exists()) {
-                filePath = java.nio.file.Paths.get(folderPath.toString(), "main.png");
-            } else {
-                filePath = java.nio.file.Paths.get(current, "database", "default", "main.png");
-            }
+            String pictureName = this.idTextField.getText().concat(".png");
+            java.nio.file.Path filePath = java.nio.file.Paths.get(current, "database", "pictures", pictureName);
+            
             javax.swing.ImageIcon newIcon = new javax.swing.ImageIcon(filePath.toString());
             newIcon.getImage().flush();
             newIcon = new javax.swing.ImageIcon(filePath.toString());
             newIcon.getImage().flush();
+            
             java.awt.Dimension pictureDimension = new java.awt.Dimension(newIcon.getIconWidth(), newIcon.getIconHeight());
             java.awt.Dimension windowDimension = new java.awt.Dimension(newIcon.getIconWidth() + 14, newIcon.getIconHeight() + 48);
             System.out.println(pictureDimension.toString());
@@ -504,16 +479,20 @@ public class RFIDgui extends javax.swing.JFrame {
 
     private void fullImageLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fullImageLabelMouseClicked
         this.fullImageWindow.setVisible(false);
+        this.fullImageWindow.dispose();
     }//GEN-LAST:event_fullImageLabelMouseClicked
 
     private void mainExitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainExitButtonMouseClicked
         exitReader();
     }//GEN-LAST:event_mainExitButtonMouseClicked
+
+    private void openTagWindowButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openTagWindowButtonMouseClicked
+        int row = this.detectedTagTable.getSelectedRow();
+        RFIDdata current = rfidTagList.get(rfidTagList.indexOf(new RFIDdata(this.detectedTagTable.getValueAt(row, 0).toString())));    
+        populateTagWindow(current);
+    }//GEN-LAST:event_openTagWindowButtonMouseClicked
     
-    private void exitReader() {
-        setVisible(false);
-        dispose();
-    }
+    
     
     /**
      * @param args the command line arguments
@@ -552,8 +531,6 @@ public class RFIDgui extends javax.swing.JFrame {
     }
 
     private java.util.ArrayList<RFIDdata> rfidTagList = new java.util.ArrayList<RFIDdata>();
-    private java.util.ArrayList<RFIDdata> writeTagList = new java.util.ArrayList<RFIDdata>();
-    private java.util.ArrayList<RFIDdata> rfidTagDatabase = new java.util.ArrayList<RFIDdata>();
     private String databaseFile = "./database/default.json";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel descriptionLabel;
@@ -575,6 +552,7 @@ public class RFIDgui extends javax.swing.JFrame {
     private javax.swing.JMenuBar mainMenuBar;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JButton openTagWindowButton;
     private javax.swing.JButton scanButton;
     private javax.swing.JLabel thumbnailDisplay;
     private javax.swing.JButton viewFullSizeImage;

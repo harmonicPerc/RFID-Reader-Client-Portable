@@ -8,7 +8,7 @@ from PIL import Image
 portable_client = True
 # Resolution of the portable touchscreen. Keep in mind that this is (columns, rows) and
 # image sizes are given in (rows, columns)
-portable_resolution = (800, 480)
+portable_resolution = (800, 395) # True resolution is (800, 480), but the task bar uses some space
 # max_thumbnail_size defines the largest dimensions acceptable for the image thumbnail
 max_thumbnail_size = (200, 200)
 # Urls for POST requests to httpserver
@@ -53,17 +53,16 @@ def format_picture(name):
     original_image_location = os.path.join(os.getcwd(), 'database', 'pictures', name) + '.png'
     im = Image.open(original_image_location)
 
-    thumbnail_location = os.path.join(os.getcwd(), 'database', 'pictures', name) + 'thumb.png'
-    thumbnail_resize_ratio = min(max_thumbnail_size[1]/float(im.size[0]), max_thumbnail_size[0]/float(im.size[1]))
-    im_thumb = im
-    im_thumb.thumbnail((im_thumb.size[0]*thumbnail_resize_ratio, im_thumb.size[1]*thumbnail_resize_ratio), Image.ANTIALIAS)
-    im_thumb.save(thumbnail_location, 'PNG')
-    
     if portable_client:
-        if im.size[0] > portable_resolution[1] or im.size[1] > portable_resolution[0]:
-            resize_ratio = min(portable_resolution[1]/float(im.size[0]), portable_resolution[0]/float(im.size[1]))
+        if im.size[0] > portable_resolution[0] or im.size[1] > portable_resolution[1]:
+            resize_ratio = min(portable_resolution[0]/float(im.size[0]), portable_resolution[1]/float(im.size[1]))
             im.thumbnail((im.size[0]*resize_ratio, im.size[1]*resize_ratio), Image.ANTIALIAS)
             im.save(original_image_location)
+
+    thumbnail_location = os.path.join(os.getcwd(), 'database', 'pictures', name) + 'thumb.png'
+    thumbnail_resize_ratio = min(max_thumbnail_size[1]/float(im.size[0]), max_thumbnail_size[0]/float(im.size[1]))
+    im.thumbnail((im.size[0]*thumbnail_resize_ratio, im.size[1]*thumbnail_resize_ratio), Image.ANTIALIAS)
+    im.save(thumbnail_location, 'PNG')
 
 # Tag read information is retrieved from the server and used to also retrieve pictures
 # associated with the tag reads. If the pictures already exist, no action is taken.

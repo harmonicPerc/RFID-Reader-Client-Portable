@@ -5,7 +5,7 @@ A Java GUI for interfacing with RFID tag read information published by the RFID-
 
 ## Requirements
 * Java >= 8u91, JDK >= 1.8.0
-* Netbeans >= 8.1
+* Netbeans IDE >= 8.1
 * Python 2.7
  * requests
  * json

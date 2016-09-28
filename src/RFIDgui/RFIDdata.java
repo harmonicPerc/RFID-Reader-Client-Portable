@@ -24,10 +24,6 @@ package RFIDgui;
 
 import java.util.Objects;
 
-/**
- *
- * @author ross
- */
 public class RFIDdata {
     public String tagNumber = "-1";
     public String objectName = "Default Name";

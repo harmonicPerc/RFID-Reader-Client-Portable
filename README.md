@@ -1,7 +1,7 @@
 # RFID-Reader-Client-Portable
 
 ## Description
-A Java GUI for interfacing with RFID tag read information published by the RFID-Reader-Server tools. The portable version has been optimized for use with a Raspberry Pi 3 and Raspberry Pi 7" Touch Display. A version for use on a desktop pc can be found in a separate repository, RFID-Reader-Client-Desktop.
+A Java GUI for interfacing with RFID tag read information published by the RFID-Reader-Server tools. The portable version has been optimized for use with a Raspberry Pi 3 and Raspberry Pi 7" Touch Display. This version can also be used on a desktop PC.
 
 ## Requirements
 * Java >= 8u91, JDK >= 1.8.0
